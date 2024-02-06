@@ -7,18 +7,22 @@ import com.edstem.employeemanagementsystem.model.Employee;
 import com.edstem.employeemanagementsystem.service.EmployeeService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.Mockito.when;
+import static org.modelmapper.internal.bytebuddy.matcher.ElementMatchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
@@ -42,7 +46,7 @@ public class EmployeeControllerTest {
         EmployeeResponse expectedResponse = new EmployeeResponse(1L, "dev","dev@gmail.com","Dev");
         when(employeeService.createEmployee(request)).thenReturn(expectedResponse);
         mockMvc.perform(
-                post("/employees")
+                post("/employee")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(request)))
                 .andDo(print())
@@ -58,20 +62,25 @@ public class EmployeeControllerTest {
         employeeResponses.add(new EmployeeResponse(2L, "sharuk", "sharuk@gmail.com", "BDA"));
         when(employeeService.getEmployeeByDepartment(department)).thenReturn(employeeResponses);
 
-        mockMvc.perform(get("/employees/department/" + department))
+        mockMvc.perform(get("/employee").param("department", department))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().json(new ObjectMapper().writeValueAsString(employeeResponses)));
-
-
-
     }
 
-//    @Test
-//
-//    void testGetEmployee() throws Exception{
-//        Long id = 1L;
-//        EmployeeResponse employeeResponse = new EmployeeResponse(1L, "Devanand", "devanand@gmail.com", "BDA");
+    @Test
+    void testGetEmployee() throws Exception {
+        Long id = 1L;
+        EmployeeResponse employee = new EmployeeResponse(id, "Devanand", "devanand@gmail.com", "BDA");
+
+        when(employeeService.getEmployee(id)).thenReturn(employee);
+
+        mockMvc.perform(get("/employee/" + id))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().json(new ObjectMapper().writeValueAsString(employee)));
+    }
+
 
 
 
