@@ -1,11 +1,11 @@
 # Service
 
 ## createEmployee
-- A 400 Bad Request error occurs when null values are provided in the name and email fields.
+- //Todo: give proper validation handling for the name and email fields.
 - Validation is not working as expected in the department field.
 
 ## getEmployee
-- A 500 Internal Server Error occurs when providing an ID that does not exist in the database.
+- //Todo: handle the exception and show only message in the response body while hitting.
 
 ## Security Concerns
 - Consider using environment variables or a secure configuration management system (Regarding db name,password in yml file)
