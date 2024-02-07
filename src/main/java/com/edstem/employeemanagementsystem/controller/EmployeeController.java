@@ -3,9 +3,8 @@ package com.edstem.employeemanagementsystem.controller;
 import com.edstem.employeemanagementsystem.contract.request.EmployeeRequest;
 import com.edstem.employeemanagementsystem.contract.response.EmployeeResponse;
 import com.edstem.employeemanagementsystem.service.EmployeeService;
-import java.util.List;
-
 import jakarta.validation.Valid;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,8 +23,8 @@ public class EmployeeController {
     @Autowired private EmployeeService employeeService;
 
     @PostMapping
-    public @ResponseBody EmployeeResponse createEmployee( @Valid
-            @RequestBody EmployeeRequest employeeRequest) {
+    public @ResponseBody EmployeeResponse createEmployee(
+            @Valid @RequestBody EmployeeRequest employeeRequest) {
         return employeeService.createEmployee(employeeRequest);
     }
 
