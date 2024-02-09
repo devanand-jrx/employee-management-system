@@ -13,3 +13,5 @@
 ### General issues
 - validations,exceptions are not working -> ( getEmployee,createEmployee )
 - //Todo: add readme file
+
+### All review comments resolved!

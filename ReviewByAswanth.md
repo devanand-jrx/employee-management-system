@@ -11,3 +11,5 @@
 
 ### Controller class
 - The class is already annotated with @RestController annotation, so @ResponseBody can be removed from the methods.
+
+### All review comments resolved!
