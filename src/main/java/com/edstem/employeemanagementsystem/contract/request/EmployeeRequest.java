@@ -1,5 +1,6 @@
 package com.edstem.employeemanagementsystem.contract.request;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,10 +11,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class EmployeeRequest {
 
-    @NotBlank(message = "name cannot be empty")
+    @NotBlank
     private String name;
 
-    @NotBlank(message = "email is required")
+    @Email
     private String email;
 
     private String department;
